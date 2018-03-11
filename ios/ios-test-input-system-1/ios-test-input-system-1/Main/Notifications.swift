@@ -10,9 +10,9 @@ import Foundation
 
 extension Notification.Name {
 
-    // MARK: Input events
+    // MARK: Input Intent Events
     
-    static let pan = Notification.Name("pan")
+    static let selectIntent = Notification.Name("selectIntent")
     
-    static let tap = Notification.Name("tap")
+    static let horizontalScrollIntent = Notification.Name("horizontalScrollIntent")
 }

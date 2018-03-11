@@ -10,14 +10,15 @@ import UIKit
 
 class ButtonInterface {
     
-    // register events from each button
-    // Publish appropriate notifications
+    // MARK: Properties
     
     private var panLeftButton: UIButton
     
     private var panRightButton: UIButton
     
     private var tapButton: UIButton
+    
+    // MARK: Initializers
     
     init(panLeftButton _panLeftButton: UIButton, panRightButton _panRightButton: UIButton, tapButton _tapButton: UIButton) {
         
@@ -32,26 +33,25 @@ class ButtonInterface {
         self.tapButton.addTarget(self, action: #selector(ButtonInterface.tapButtonTouchUpInside(_:)), for: .touchUpInside)
     }
     
+    // MARK: Actions
+    
     @objc
     private func panLeftButtonTouchUpInside(_ sender: UIButton) {
         
-        print("pan left button press")
-        
-        NotificationCenter.default.post(name: .pan, object: nil)
+        NotificationCenter.default.post(name: .horizontalScrollIntent,
+                                        object: HorizontalScrollIntentData(distance: 0.1, rightwards: false))
     }
     
     @objc
     private func panRightButtonTouchUpInside(_ sender: UIButton) {
         
-        print("pan right button press")
-        
-        NotificationCenter.default.post(name: .pan, object: nil)
+        NotificationCenter.default.post(name: .horizontalScrollIntent,
+                                        object: HorizontalScrollIntentData(distance: 0.1, rightwards: true))
     }
     
     @objc
     private func tapButtonTouchUpInside(_ sender: UIButton) {
         
-        print("tap button press")
-        NotificationCenter.default.post(name: .tap, object: nil)
+        NotificationCenter.default.post(name: .selectIntent, object: CGPoint(x: 0, y: 0))
     }
 }

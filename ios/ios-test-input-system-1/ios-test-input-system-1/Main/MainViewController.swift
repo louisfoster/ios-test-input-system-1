@@ -30,7 +30,7 @@ class MainViewController: UIViewController {
     
     // These all need to be allocated to variables, otherwise they won't work
     private var buttonInterface: ButtonInterface?
-    private var screenInterface: ScreenInterface?
+    private var gestureInterface: GestureInterface?
     private var textDisplay: TextDisplay?
     
     override func viewDidLoad() {
@@ -40,9 +40,9 @@ class MainViewController: UIViewController {
         
         self.registerInterfaces()
         
-        if let label = self.outputLabel {
+        if let label = self.outputLabel, let scnv = self.sceneView {
         
-            self.textDisplay = TextDisplay(with: label, registerEvents: [.pan, .tap])
+            self.textDisplay = TextDisplay(with: label, sceneView: scnv)
         }
         
         self.sceneView?.showsStatistics = true
@@ -55,7 +55,7 @@ class MainViewController: UIViewController {
         
         if let s = self.sceneView {
         
-            self.screenInterface = ScreenInterface(sceneView: s)
+            self.gestureInterface = GestureInterface(sceneView: s)
         }
         
         if let dlb = self.dragLeftButton, let drb = self.dragRightButton, let tb = self.tapButton {
