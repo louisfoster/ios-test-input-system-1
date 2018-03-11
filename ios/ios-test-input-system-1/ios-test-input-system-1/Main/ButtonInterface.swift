@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SceneKit
 
 class ButtonInterface {
     
@@ -39,19 +40,19 @@ class ButtonInterface {
     private func panLeftButtonTouchUpInside(_ sender: UIButton) {
         
         NotificationCenter.default.post(name: .horizontalScrollIntent,
-                                        object: HorizontalScrollIntentData(distance: 0.1, rightwards: false))
+                                        object: HorizontalScrollIntentData(rotationMatrix: SCNMatrix4MakeRotation(0.5, 0, -50, 0), gestureStateEnded: true))
     }
     
     @objc
     private func panRightButtonTouchUpInside(_ sender: UIButton) {
         
         NotificationCenter.default.post(name: .horizontalScrollIntent,
-                                        object: HorizontalScrollIntentData(distance: 0.1, rightwards: true))
+                                        object: HorizontalScrollIntentData(rotationMatrix: SCNMatrix4MakeRotation(0.5, 0, 50, 0), gestureStateEnded: true))
     }
     
     @objc
     private func tapButtonTouchUpInside(_ sender: UIButton) {
         
-        NotificationCenter.default.post(name: .selectIntent, object: CGPoint(x: 0, y: 0))
+        NotificationCenter.default.post(name: .selectIntent, object: CGPoint(x: 260.0, y: 270.0))
     }
 }

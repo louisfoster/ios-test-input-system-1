@@ -45,6 +45,8 @@ class MainViewController: UIViewController {
             self.textDisplay = TextDisplay(with: label, sceneView: scnv)
         }
         
+        self.addObjectsToScene()
+        
         self.sceneView?.showsStatistics = true
         self.sceneView?.backgroundColor = UIColor.black
         
@@ -62,5 +64,24 @@ class MainViewController: UIViewController {
         
             self.buttonInterface = ButtonInterface(panLeftButton: dlb, panRightButton: drb, tapButton: tb)
         }
+    }
+    
+    func addObjectsToScene() {
+        
+        // Camera
+        let camera = SCNNode()
+        camera.camera = SCNCamera()
+        self.scene?.rootNode.addChildNode(camera)
+        camera.position = SCNVector3(5, 2, 0)
+        camera.look(at: SCNVector3(0, 0, 0))
+        
+        // Cube Holder
+        let cubeHolder = SCNNode()
+        self.scene?.rootNode.addChildNode(cubeHolder)
+        cubeHolder.position = SCNVector3(1, 0, -1)
+        
+        // Cube
+        let cube = Cube(sceneView: self.sceneView)
+        cubeHolder.addChildNode(cube)
     }
 }

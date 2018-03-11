@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		053233B299D701FFA9649B53 /* Pods_ios_test_input_system_1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4287D11DB35C16A29DDB256 /* Pods_ios_test_input_system_1.framework */; };
+		DE4577A320553C0D0075469A /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4577A220553C0D0075469A /* Cube.swift */; };
+		DE4577A520553FB90075469A /* Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4577A420553FB90075469A /* Closures.swift */; };
 		DEAC1FFD2054C52500EAD6F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAC1FFC2054C52500EAD6F0 /* AppDelegate.swift */; };
 		DEAC20042054C52500EAD6F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEAC20032054C52500EAD6F0 /* Assets.xcassets */; };
 		DEAC20072054C52500EAD6F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEAC20052054C52500EAD6F0 /* LaunchScreen.storyboard */; };
@@ -24,6 +26,8 @@
 /* Begin PBXFileReference section */
 		1D4EC7C8BD8C4C550BE4AAC2 /* Pods-ios-test-input-system-1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-test-input-system-1.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios-test-input-system-1/Pods-ios-test-input-system-1.debug.xcconfig"; sourceTree = "<group>"; };
 		DE1229397960D1C230C9B93F /* Pods-ios-test-input-system-1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-test-input-system-1.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios-test-input-system-1/Pods-ios-test-input-system-1.release.xcconfig"; sourceTree = "<group>"; };
+		DE4577A220553C0D0075469A /* Cube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
+		DE4577A420553FB90075469A /* Closures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Closures.swift; sourceTree = "<group>"; };
 		DEAC1FF92054C52500EAD6F0 /* ios-test-input-system-1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-test-input-system-1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEAC1FFC2054C52500EAD6F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEAC20032054C52500EAD6F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -110,6 +114,8 @@
 				DEAC201A2054D8B300EAD6F0 /* ButtonInterface.swift */,
 				DEAC201C2054DFDD00EAD6F0 /* Notifications.swift */,
 				DEAC201E2054E52C00EAD6F0 /* TextDisplay.swift */,
+				DE4577A220553C0D0075469A /* Cube.swift */,
+				DE4577A420553FB90075469A /* Closures.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -258,8 +264,10 @@
 			files = (
 				DEAC201D2054DFDD00EAD6F0 /* Notifications.swift in Sources */,
 				DEAC201F2054E52C00EAD6F0 /* TextDisplay.swift in Sources */,
+				DE4577A520553FB90075469A /* Closures.swift in Sources */,
 				DEAC20172054D2CF00EAD6F0 /* InputIntent.swift in Sources */,
 				DEAC20192054D8A400EAD6F0 /* GestureInterface.swift in Sources */,
+				DE4577A320553C0D0075469A /* Cube.swift in Sources */,
 				DEAC1FFD2054C52500EAD6F0 /* AppDelegate.swift in Sources */,
 				DEAC20132054C58900EAD6F0 /* MainViewController.swift in Sources */,
 				DEAC201B2054D8B300EAD6F0 /* ButtonInterface.swift in Sources */,

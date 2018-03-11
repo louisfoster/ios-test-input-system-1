@@ -17,27 +17,46 @@ enum InputEvents {
 
 struct HorizontalScrollIntentData {
     
-    var distance: CGFloat
-    var rightwards: Bool
+    var rotationMatrix: SCNMatrix4
+    var gestureStateEnded: Bool
 }
 
-class InputIntent {
+protocol InputIntentProtocol {
+    
+    var inputEvents: Array<InputEvents> { get }
+    var sceneView: SCNView { get }
+    var onSelectIntent: OnSelectIntentClosure? { get }
+    var onHorizontalScrollIntent: OnHorizontalScrollIntentClosure? { get }
+}
+
+class InputIntent: InputIntentProtocol {
     
     // MARK: Properties
     
-    private var inputEvents: Array<InputEvents> = [
+    var inputEvents: Array<InputEvents> = [
     
         .tap,
         .pan
     ]
     
-    private var sceneView: SCNView
+    private(set) var sceneView: SCNView
+    
+    private(set) var onSelectIntent: OnSelectIntentClosure?
+    
+    private(set) var onHorizontalScrollIntent: OnHorizontalScrollIntentClosure?
     
     // MARK: Initializers
     
-    init(sceneView _sceneView: SCNView, registerEvents: Array<InputEvents>) {
+    init(sceneView _sceneView: SCNView,
+         registerEvents: Array<InputEvents>,
+         onSelectIntent _onSelectIntent: OnSelectIntentClosure?,
+         onHorizontalScrollIntent _onHorizontalScrollIntent: OnHorizontalScrollIntentClosure?) {
         
         self.sceneView = _sceneView
+        
+        self.onSelectIntent = _onSelectIntent
+        
+        self.onHorizontalScrollIntent = _onHorizontalScrollIntent
         
         for event in registerEvents {
             
@@ -67,7 +86,7 @@ class InputIntent {
         
         if let point = notification.object as? CGPoint {
         
-            self.onTap(point: point, hitTestResults: self.sceneView.hitTest(point, options: [:]))
+            self.onSelectIntent?(point, self.sceneView.hitTest(point, options: [:]))
         }
     }
     
@@ -76,16 +95,7 @@ class InputIntent {
         
         if let horizontalScrollIntentData = notification.object as? HorizontalScrollIntentData {
             
-            self.onPan(distance: horizontalScrollIntentData.distance,
-                       rightwards: horizontalScrollIntentData.rightwards)
+            self.onHorizontalScrollIntent?(horizontalScrollIntentData)
         }
-    }
-    
-    func onTap(point: CGPoint, hitTestResults: [SCNHitTestResult]) {
-        // Override
-    }
-    
-    func onPan(distance: CGFloat, rightwards: Bool) {
-        // Override
     }
 }

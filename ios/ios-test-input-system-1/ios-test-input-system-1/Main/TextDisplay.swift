@@ -9,10 +9,11 @@
 import UIKit
 import SceneKit
 
-class TextDisplay: InputIntent {
+class TextDisplay {
     
     private var textDisplayLabel: UILabel
-    private var sceneView: SCNView
+    var sceneView: SCNView
+    private var inputIntent: InputIntent?
     
     convenience init(with _textDisplayLabel: UILabel, sceneView _sceneView: SCNView) {
         
@@ -23,31 +24,39 @@ class TextDisplay: InputIntent {
         
         self.textDisplayLabel = _textDisplayLabel
         self.sceneView = _sceneView
-        
-        super.init(sceneView: _sceneView, registerEvents: registerEvents)
+        self.inputIntent = InputIntent(sceneView: self.sceneView,
+                                       registerEvents: registerEvents,
+                                       onSelectIntent: { (point, hits) in
+                                        
+                                            self.onTap(point, hits)
+                                       },
+                                       onHorizontalScrollIntent: { (horizontalScrollIntentData) in
+            
+                                            self.onPan(horizontalScrollIntentData)
+                                       })
     }
     
-    override func onTap(point: CGPoint, hitTestResults: [SCNHitTestResult]) {
+    func onTap(_ point: CGPoint, _ hitTestResults: [SCNHitTestResult]) {
         
         var text = """
         TAP!
         Point: \(point)\n
         """
         
-        if hitTestResults.count > 0 {
+        if hitTestResults.count > 0, let name = hitTestResults[0].node.name {
             
-            text += "\(hitTestResults[0])"
+            text += "Hit: \(name)"
         }
         
         self.textDisplayLabel.text = text
     }
     
-    override func onPan(distance: CGFloat, rightwards: Bool) {
+    func onPan(_ horizontalScrollIntentData: HorizontalScrollIntentData) {
     
         let text = """
         PAN!
-        Distance: \(distance)
-        Rightwards: \(rightwards)
+        Has translation: \(String(describing: horizontalScrollIntentData.rotationMatrix).prefix(10))
+        Has ended: \(horizontalScrollIntentData.gestureStateEnded)
         """
         
         self.textDisplayLabel.text = text

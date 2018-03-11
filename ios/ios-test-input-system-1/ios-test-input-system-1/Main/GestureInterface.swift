@@ -36,25 +36,23 @@ class GestureInterface {
     // MARK: Actions
     
     @objc
-    func handleTap(_ gestureRecognizer: UIGestureRecognizer) {
+    func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
         
         NotificationCenter.default.post(name: .selectIntent, object: gestureRecognizer.location(in: self.sceneView))
     }
     
     @objc
-    func handlePan(_ gestureRecognizer: UIGestureRecognizer) {
+    func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
         
-        let point = gestureRecognizer.location(in: self.sceneView)
-        var object: HorizontalScrollIntentData?
+        let translation = gestureRecognizer.translation(in: self.sceneView)
         
-        if let previous = self.previousPanPoint {
-            
-            let line = previous.x - point.x
-            
-            object = HorizontalScrollIntentData(distance: abs(line) / self.sceneView.bounds.width, rightwards: line < 0)
-        }
+        let x = Float(translation.x)
+        let anglePan = abs(x) * (Float.pi / 180.0)
         
-        self.previousPanPoint = point
+        let object = HorizontalScrollIntentData(
+            rotationMatrix: SCNMatrix4MakeRotation(anglePan, 0, x, 0),
+            gestureStateEnded: gestureRecognizer.state == UIGestureRecognizerState.ended
+        )
         
         NotificationCenter.default.post(name: .horizontalScrollIntent, object: object)
     }
