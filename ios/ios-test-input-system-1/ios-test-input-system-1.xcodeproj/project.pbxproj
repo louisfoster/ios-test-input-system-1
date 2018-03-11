@@ -14,6 +14,11 @@
 		DEAC200F2054C54B00EAD6F0 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = DEAC200E2054C54B00EAD6F0 /* art.scnassets */; };
 		DEAC20132054C58900EAD6F0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAC20112054C58900EAD6F0 /* MainViewController.swift */; };
 		DEAC20142054C58900EAD6F0 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEAC20122054C58900EAD6F0 /* MainViewController.xib */; };
+		DEAC20172054D2CF00EAD6F0 /* Input.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAC20162054D2CF00EAD6F0 /* Input.swift */; };
+		DEAC20192054D8A400EAD6F0 /* ScreenInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAC20182054D8A400EAD6F0 /* ScreenInterface.swift */; };
+		DEAC201B2054D8B300EAD6F0 /* ButtonInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAC201A2054D8B300EAD6F0 /* ButtonInterface.swift */; };
+		DEAC201D2054DFDD00EAD6F0 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAC201C2054DFDD00EAD6F0 /* Notifications.swift */; };
+		DEAC201F2054E52C00EAD6F0 /* TextDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAC201E2054E52C00EAD6F0 /* TextDisplay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +32,11 @@
 		DEAC200E2054C54B00EAD6F0 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		DEAC20112054C58900EAD6F0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DEAC20122054C58900EAD6F0 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		DEAC20162054D2CF00EAD6F0 /* Input.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Input.swift; sourceTree = "<group>"; };
+		DEAC20182054D8A400EAD6F0 /* ScreenInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenInterface.swift; sourceTree = "<group>"; };
+		DEAC201A2054D8B300EAD6F0 /* ButtonInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonInterface.swift; sourceTree = "<group>"; };
+		DEAC201C2054DFDD00EAD6F0 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		DEAC201E2054E52C00EAD6F0 /* TextDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDisplay.swift; sourceTree = "<group>"; };
 		F4287D11DB35C16A29DDB256 /* Pods_ios_test_input_system_1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_test_input_system_1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -95,6 +105,11 @@
 			children = (
 				DEAC20112054C58900EAD6F0 /* MainViewController.swift */,
 				DEAC20122054C58900EAD6F0 /* MainViewController.xib */,
+				DEAC20162054D2CF00EAD6F0 /* Input.swift */,
+				DEAC20182054D8A400EAD6F0 /* ScreenInterface.swift */,
+				DEAC201A2054D8B300EAD6F0 /* ButtonInterface.swift */,
+				DEAC201C2054DFDD00EAD6F0 /* Notifications.swift */,
+				DEAC201E2054E52C00EAD6F0 /* TextDisplay.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -241,8 +256,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEAC201D2054DFDD00EAD6F0 /* Notifications.swift in Sources */,
+				DEAC201F2054E52C00EAD6F0 /* TextDisplay.swift in Sources */,
+				DEAC20172054D2CF00EAD6F0 /* Input.swift in Sources */,
+				DEAC20192054D8A400EAD6F0 /* ScreenInterface.swift in Sources */,
 				DEAC1FFD2054C52500EAD6F0 /* AppDelegate.swift in Sources */,
 				DEAC20132054C58900EAD6F0 /* MainViewController.swift in Sources */,
+				DEAC201B2054D8B300EAD6F0 /* ButtonInterface.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

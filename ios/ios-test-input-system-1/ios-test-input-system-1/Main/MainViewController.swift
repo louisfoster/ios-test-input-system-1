@@ -28,14 +28,39 @@ class MainViewController: UIViewController {
     
     private var scene: SCNScene?
     
+    // These all need to be allocated to variables, otherwise they won't work
+    private var buttonInterface: ButtonInterface?
+    private var screenInterface: ScreenInterface?
+    private var textDisplay: TextDisplay?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.scene = SCNScene()
         
+        self.registerInterfaces()
+        
+        if let label = self.outputLabel {
+        
+            self.textDisplay = TextDisplay(with: label, registerEvents: [.pan, .tap])
+        }
+        
         self.sceneView?.showsStatistics = true
         self.sceneView?.backgroundColor = UIColor.black
         
         self.sceneView?.scene = self.scene
+    }
+    
+    func registerInterfaces() {
+        
+        if let s = self.sceneView {
+        
+            self.screenInterface = ScreenInterface(sceneView: s)
+        }
+        
+        if let dlb = self.dragLeftButton, let drb = self.dragRightButton, let tb = self.tapButton {
+        
+            self.buttonInterface = ButtonInterface(panLeftButton: dlb, panRightButton: drb, tapButton: tb)
+        }
     }
 }
