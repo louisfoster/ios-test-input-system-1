@@ -9,41 +9,34 @@
 import UIKit
 import SceneKit
 
-class TextDisplay {
+class TextDisplay: SelectIntentObserverProtocol, HorizontalScrollIntentObserverProtocol {
     
+    private(set) var id: Int
     private var textDisplayLabel: UILabel
-    var sceneView: SCNView
-    private var inputIntent: InputIntent?
+    private(set) var sceneView: SCNView?
+    private(set) var inputIntent: InputIntent?
     
-    convenience init(with _textDisplayLabel: UILabel, sceneView _sceneView: SCNView) {
+    init(with _textDisplayLabel: UILabel, sceneView _sceneView: SCNView, inputIntent _inputIntent: InputIntent) {
         
-        self.init(_textDisplayLabel, _sceneView, [.pan, .tap])
-    }
-    
-    private init(_ _textDisplayLabel: UILabel, _ _sceneView: SCNView, _ registerEvents: Array<InputEvents>) {
-        
+        self.id = 0
         self.textDisplayLabel = _textDisplayLabel
         self.sceneView = _sceneView
-        self.inputIntent = InputIntent(sceneView: self.sceneView,
-                                       registerEvents: registerEvents,
-                                       onSelectIntent: { (point, hits) in
-                                        
-                                            self.onTap(point, hits)
-                                       },
-                                       onHorizontalScrollIntent: { (horizontalScrollIntentData) in
-            
-                                            self.onPan(horizontalScrollIntentData)
-                                       })
+        self.inputIntent = _inputIntent
+        
+        self.registerSelectIntentObserver()
+        self.registerHorizontalScrollIntentObserver()
     }
     
-    func onTap(_ point: CGPoint, _ hitTestResults: [SCNHitTestResult]) {
+    func onSelectIntent(selectIntentData: SelectIntentData) {
         
         var text = """
         TAP!
-        Point: \(point)\n
+        Point: \(selectIntentData.point)\n
         """
         
-        if hitTestResults.count > 0, let name = hitTestResults[0].node.name {
+        let hits = selectIntentData.hitTestResults
+        
+        if hits.count > 0, let name = hits[0].node.name {
             
             text += "Hit: \(name)"
         }
@@ -51,8 +44,8 @@ class TextDisplay {
         self.textDisplayLabel.text = text
     }
     
-    func onPan(_ horizontalScrollIntentData: HorizontalScrollIntentData) {
-    
+    func onHorizontalScrollIntent(horizontalScrollIntentData: HorizontalScrollIntentData) {
+        
         let text = """
         PAN!
         Has translation: \(String(describing: horizontalScrollIntentData.rotationMatrix).prefix(10))

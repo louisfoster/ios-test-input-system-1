@@ -11,5 +11,5 @@ import SceneKit
 
 // MARK: Intent Closures
 
-typealias OnSelectIntentClosure = ((CGPoint, [SCNHitTestResult]) -> Void)
+typealias OnSelectIntentClosure = ((SelectIntentData) -> Void)
 typealias OnHorizontalScrollIntentClosure = ((HorizontalScrollIntentData) -> Void)

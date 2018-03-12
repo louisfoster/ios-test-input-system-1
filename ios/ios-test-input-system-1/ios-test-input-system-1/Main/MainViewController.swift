@@ -11,6 +11,8 @@ import SceneKit
 
 class MainViewController: UIViewController {
     
+    // MARK: UI Propeties
+    
     @IBOutlet
     private var sceneView: SCNView?
     
@@ -28,22 +30,24 @@ class MainViewController: UIViewController {
     
     private var scene: SCNScene?
     
+    private var inputIntent: InputIntent?
+    
     // These all need to be allocated to variables, otherwise they won't work
     private var buttonInterface: ButtonInterface?
     private var gestureInterface: GestureInterface?
     private var textDisplay: TextDisplay?
     
+    // MARK: Setup
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         self.scene = SCNScene()
         
+        self.inputIntent = InputIntent()
+        
         self.registerInterfaces()
-        
-        if let label = self.outputLabel, let scnv = self.sceneView {
-        
-            self.textDisplay = TextDisplay(with: label, sceneView: scnv)
-        }
         
         self.addObjectsToScene()
         
@@ -62,11 +66,19 @@ class MainViewController: UIViewController {
         
         if let dlb = self.dragLeftButton, let drb = self.dragRightButton, let tb = self.tapButton {
         
-            self.buttonInterface = ButtonInterface(panLeftButton: dlb, panRightButton: drb, tapButton: tb)
+            self.buttonInterface = ButtonInterface(sceneView: self.sceneView, panLeftButton: dlb, panRightButton: drb, tapButton: tb)
         }
     }
     
     func addObjectsToScene() {
+        
+        guard let i = self.inputIntent else { return }
+        
+        // Text label output
+        if let label = self.outputLabel, let scnv = self.sceneView {
+            
+            self.textDisplay = TextDisplay(with: label, sceneView: scnv, inputIntent: i)
+        }
         
         // Camera
         let camera = SCNNode()
@@ -81,7 +93,7 @@ class MainViewController: UIViewController {
         cubeHolder.position = SCNVector3(1, 0, -1)
         
         // Cube
-        let cube = Cube(sceneView: self.sceneView)
+        let cube = Cube(sceneView: self.sceneView, inputIntent: i)
         cubeHolder.addChildNode(cube)
     }
 }

@@ -9,10 +9,12 @@
 import UIKit
 import SceneKit
 
-enum InputEvents {
+// MARK: Intent Data Structures
+
+struct SelectIntentData {
     
-    case tap
-    case pan
+    var point: CGPoint
+    var hitTestResults: [SCNHitTestResult]
 }
 
 struct HorizontalScrollIntentData {
@@ -21,62 +23,113 @@ struct HorizontalScrollIntentData {
     var gestureStateEnded: Bool
 }
 
+// MARK: Intent Sender Protocols
+
+protocol SelectIntentSenderProtocol {
+    
+    var sceneView: SCNView? { get }
+}
+
+extension SelectIntentSenderProtocol {
+    
+    func sendSelectIntent(_ selectIntentData: SelectIntentData) {
+        
+        NotificationCenter.default.post(name: .selectIntent, object: selectIntentData)
+    }
+}
+
+protocol HorizontalScrollIntentSenderProtocol {}
+
+extension HorizontalScrollIntentSenderProtocol {
+    
+    func sendHorizontalScrollIntent(_ horizontalScrollIntentData: HorizontalScrollIntentData) {
+        
+        NotificationCenter.default.post(name: .horizontalScrollIntent, object: horizontalScrollIntentData)
+    }
+}
+
+// MARK: Intent Observer Protocols
+
+protocol SelectIntentObserverProtocol {
+    
+    var id: Int { get }
+    var inputIntent: InputIntent? { get }
+    func onSelectIntent(selectIntentData: SelectIntentData)
+}
+
+extension SelectIntentObserverProtocol {
+    
+    func registerSelectIntentObserver() {
+        
+        self.inputIntent?.addSelectIntentObserver(id: self.id, onSelectIntent: self.onSelectIntent)
+    }
+    
+    func deregisterSelectIntentObserver() {
+        
+        self.inputIntent?.removeSelectIntentObserver(id: self.id)
+    }
+}
+
+protocol HorizontalScrollIntentObserverProtocol {
+    
+    var id: Int { get }
+    var inputIntent: InputIntent? { get }
+    func onHorizontalScrollIntent(horizontalScrollIntentData: HorizontalScrollIntentData)
+}
+
+extension HorizontalScrollIntentObserverProtocol {
+    
+    func registerHorizontalScrollIntentObserver() {
+        
+        self.inputIntent?.addHorizontalScrollIntentObserver(id: self.id, onHorizontalScrollIntent: self.onHorizontalScrollIntent)
+    }
+    
+    func deregisterHorizontalScrollIntentObserver() {
+        
+        self.inputIntent?.removeHorizontalScrollIntentObserver(id: self.id)
+    }
+}
+
+// MARK: Input Intent
+
 protocol InputIntentProtocol {
     
-    var inputEvents: Array<InputEvents> { get }
-    var sceneView: SCNView { get }
-    var onSelectIntent: OnSelectIntentClosure? { get }
-    var onHorizontalScrollIntent: OnHorizontalScrollIntentClosure? { get }
+    var selectIntentObservers: Dictionary<Int, OnSelectIntentClosure> { get }
+    var horizontalScrollIntentObservers: Dictionary<Int, OnHorizontalScrollIntentClosure> { get }
+    
+    func selectIntentReceived(notification: Notification)
+    func horizontalScrollIntentReceived(notification: Notification)
+    
+    func addSelectIntentObserver(id: Int, onSelectIntent: @escaping OnSelectIntentClosure)
+    func addHorizontalScrollIntentObserver(id: Int, onHorizontalScrollIntent: @escaping OnHorizontalScrollIntentClosure)
+    
+    func removeSelectIntentObserver(id: Int)
+    func removeHorizontalScrollIntentObserver(id: Int)
 }
 
 class InputIntent: InputIntentProtocol {
     
     // MARK: Properties
     
-    var inputEvents: Array<InputEvents> = [
-    
-        .tap,
-        .pan
-    ]
-    
-    private(set) var sceneView: SCNView
-    
-    private(set) var onSelectIntent: OnSelectIntentClosure?
-    
-    private(set) var onHorizontalScrollIntent: OnHorizontalScrollIntentClosure?
-    
+    private(set) var selectIntentObservers: Dictionary<Int, OnSelectIntentClosure>
+    private(set) var horizontalScrollIntentObservers: Dictionary<Int, OnHorizontalScrollIntentClosure>
+
     // MARK: Initializers
     
-    init(sceneView _sceneView: SCNView,
-         registerEvents: Array<InputEvents>,
-         onSelectIntent _onSelectIntent: OnSelectIntentClosure?,
-         onHorizontalScrollIntent _onHorizontalScrollIntent: OnHorizontalScrollIntentClosure?) {
+    init() {
         
-        self.sceneView = _sceneView
+        self.selectIntentObservers = [:]
+        self.horizontalScrollIntentObservers = [:]
         
-        self.onSelectIntent = _onSelectIntent
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(InputIntent.selectIntentReceived(notification:)),
+                                               name: .selectIntent,
+                                               object: nil)
         
-        self.onHorizontalScrollIntent = _onHorizontalScrollIntent
-        
-        for event in registerEvents {
-            
-            switch event {
-                
-            case .pan:
-                
-                NotificationCenter.default.addObserver(self,
-                                                       selector: #selector(InputIntent.selectIntentReceived(notification:)),
-                                                       name: .selectIntent,
-                                                       object: nil)
-                
-            case .tap:
-                
-                NotificationCenter.default.addObserver(self,
-                                                       selector: #selector(InputIntent.horizontalScrollIntentReceived(notification:)),
-                                                       name: .horizontalScrollIntent,
-                                                       object: nil)
-            }
-        }
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(InputIntent.horizontalScrollIntentReceived(notification:)),
+                                               name: .horizontalScrollIntent,
+                                               object: nil)
     }
     
     // MARK: Actions
@@ -84,9 +137,12 @@ class InputIntent: InputIntentProtocol {
     @objc
     func selectIntentReceived(notification: Notification) {
         
-        if let point = notification.object as? CGPoint {
+        if let selectIntentData = notification.object as? SelectIntentData {
         
-            self.onSelectIntent?(point, self.sceneView.hitTest(point, options: [:]))
+            for (_, onSelectIntent) in self.selectIntentObservers {
+                
+                onSelectIntent(selectIntentData)
+            }
         }
     }
     
@@ -95,7 +151,30 @@ class InputIntent: InputIntentProtocol {
         
         if let horizontalScrollIntentData = notification.object as? HorizontalScrollIntentData {
             
-            self.onHorizontalScrollIntent?(horizontalScrollIntentData)
+            for (_, onHorizontalScrollIntent) in self.horizontalScrollIntentObservers {
+                
+                onHorizontalScrollIntent(horizontalScrollIntentData)
+            }
         }
+    }
+    
+    func addSelectIntentObserver(id: Int, onSelectIntent: @escaping OnSelectIntentClosure) {
+        
+        self.selectIntentObservers[id] = onSelectIntent
+    }
+    
+    func addHorizontalScrollIntentObserver(id: Int, onHorizontalScrollIntent: @escaping OnHorizontalScrollIntentClosure) {
+        
+        self.horizontalScrollIntentObservers[id] = onHorizontalScrollIntent
+    }
+    
+    func removeSelectIntentObserver(id: Int) {
+        
+        self.selectIntentObservers[id] = nil
+    }
+    
+    func removeHorizontalScrollIntentObserver(id: Int) {
+        
+        self.horizontalScrollIntentObservers[id] = nil
     }
 }

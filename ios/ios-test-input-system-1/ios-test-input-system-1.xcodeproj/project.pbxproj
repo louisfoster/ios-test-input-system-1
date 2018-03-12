@@ -13,7 +13,6 @@
 		DEAC1FFD2054C52500EAD6F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAC1FFC2054C52500EAD6F0 /* AppDelegate.swift */; };
 		DEAC20042054C52500EAD6F0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEAC20032054C52500EAD6F0 /* Assets.xcassets */; };
 		DEAC20072054C52500EAD6F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEAC20052054C52500EAD6F0 /* LaunchScreen.storyboard */; };
-		DEAC200F2054C54B00EAD6F0 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = DEAC200E2054C54B00EAD6F0 /* art.scnassets */; };
 		DEAC20132054C58900EAD6F0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAC20112054C58900EAD6F0 /* MainViewController.swift */; };
 		DEAC20142054C58900EAD6F0 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEAC20122054C58900EAD6F0 /* MainViewController.xib */; };
 		DEAC20172054D2CF00EAD6F0 /* InputIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAC20162054D2CF00EAD6F0 /* InputIntent.swift */; };
@@ -33,7 +32,6 @@
 		DEAC20032054C52500EAD6F0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEAC20062054C52500EAD6F0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DEAC20082054C52500EAD6F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DEAC200E2054C54B00EAD6F0 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		DEAC20112054C58900EAD6F0 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DEAC20122054C58900EAD6F0 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		DEAC20162054D2CF00EAD6F0 /* InputIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputIntent.swift; sourceTree = "<group>"; };
@@ -96,7 +94,6 @@
 			children = (
 				DEAC20102054C57500EAD6F0 /* Main */,
 				DEAC1FFC2054C52500EAD6F0 /* AppDelegate.swift */,
-				DEAC200E2054C54B00EAD6F0 /* art.scnassets */,
 				DEAC20032054C52500EAD6F0 /* Assets.xcassets */,
 				DEAC20052054C52500EAD6F0 /* LaunchScreen.storyboard */,
 				DEAC20082054C52500EAD6F0 /* Info.plist */,
@@ -184,7 +181,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEAC20072054C52500EAD6F0 /* LaunchScreen.storyboard in Resources */,
-				DEAC200F2054C54B00EAD6F0 /* art.scnassets in Resources */,
 				DEAC20042054C52500EAD6F0 /* Assets.xcassets in Resources */,
 				DEAC20142054C58900EAD6F0 /* MainViewController.xib in Resources */,
 			);

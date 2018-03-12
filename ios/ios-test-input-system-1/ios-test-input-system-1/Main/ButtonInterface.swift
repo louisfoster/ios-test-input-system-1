@@ -9,9 +9,11 @@
 import UIKit
 import SceneKit
 
-class ButtonInterface {
+class ButtonInterface: SelectIntentSenderProtocol, HorizontalScrollIntentSenderProtocol {
     
     // MARK: Properties
+    
+    private(set) var sceneView: SCNView?
     
     private var panLeftButton: UIButton
     
@@ -21,7 +23,9 @@ class ButtonInterface {
     
     // MARK: Initializers
     
-    init(panLeftButton _panLeftButton: UIButton, panRightButton _panRightButton: UIButton, tapButton _tapButton: UIButton) {
+    init(sceneView _sceneView: SCNView?, panLeftButton _panLeftButton: UIButton, panRightButton _panRightButton: UIButton, tapButton _tapButton: UIButton) {
+        
+        self.sceneView = _sceneView
         
         self.panLeftButton = _panLeftButton
         self.panRightButton = _panRightButton
@@ -39,20 +43,22 @@ class ButtonInterface {
     @objc
     private func panLeftButtonTouchUpInside(_ sender: UIButton) {
         
-        NotificationCenter.default.post(name: .horizontalScrollIntent,
-                                        object: HorizontalScrollIntentData(rotationMatrix: SCNMatrix4MakeRotation(0.5, 0, -50, 0), gestureStateEnded: true))
+        self.sendHorizontalScrollIntent(HorizontalScrollIntentData(rotationMatrix: SCNMatrix4MakeRotation(0.5, 0, -50, 0), gestureStateEnded: true))
     }
     
     @objc
     private func panRightButtonTouchUpInside(_ sender: UIButton) {
         
-        NotificationCenter.default.post(name: .horizontalScrollIntent,
-                                        object: HorizontalScrollIntentData(rotationMatrix: SCNMatrix4MakeRotation(0.5, 0, 50, 0), gestureStateEnded: true))
+        self.sendHorizontalScrollIntent(HorizontalScrollIntentData(rotationMatrix: SCNMatrix4MakeRotation(0.5, 0, 50, 0), gestureStateEnded: true))
     }
     
     @objc
     private func tapButtonTouchUpInside(_ sender: UIButton) {
         
-        NotificationCenter.default.post(name: .selectIntent, object: CGPoint(x: 260.0, y: 270.0))
+        let point = CGPoint(x: 260.0, y: 270.0)
+        if let hitTestResults = self.sceneView?.hitTest(point, options: [:]) {
+            
+            self.sendSelectIntent(SelectIntentData(point: point, hitTestResults: hitTestResults))
+        }
     }
 }

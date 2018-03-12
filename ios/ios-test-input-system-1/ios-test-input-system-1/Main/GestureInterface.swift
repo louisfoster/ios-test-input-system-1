@@ -9,28 +9,27 @@
 import UIKit
 import SceneKit
 
-class GestureInterface {
+class GestureInterface: SelectIntentSenderProtocol, HorizontalScrollIntentSenderProtocol {
     
     // MARK: Properties
     
-    private var sceneView: SCNView
-    private var previousPanPoint: CGPoint?
+    private(set) var sceneView: SCNView?
     
     // MARK: Initializers
     
-    init(sceneView _sceneView: SCNView) {
+    init(sceneView _sceneView: SCNView?) {
         
         self.sceneView = _sceneView
         
         let tapGesture = UITapGestureRecognizer(target: self,
                                                 action: #selector(GestureInterface.handleTap(_:)))
         tapGesture.numberOfTapsRequired = 1
-        self.sceneView.addGestureRecognizer(tapGesture)
+        self.sceneView?.addGestureRecognizer(tapGesture)
         
         let panGesture = UIPanGestureRecognizer(target: self,
                                                 action: #selector(GestureInterface.handlePan(_:)))
         panGesture.maximumNumberOfTouches = 1
-        self.sceneView.addGestureRecognizer(panGesture)
+        self.sceneView?.addGestureRecognizer(panGesture)
     }
     
     // MARK: Actions
@@ -38,7 +37,11 @@ class GestureInterface {
     @objc
     func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
         
-        NotificationCenter.default.post(name: .selectIntent, object: gestureRecognizer.location(in: self.sceneView))
+        let point = gestureRecognizer.location(in: self.sceneView)
+        if let hitTestResults = self.sceneView?.hitTest(point, options: [:]) {
+        
+            self.sendSelectIntent(SelectIntentData(point: point, hitTestResults: hitTestResults))
+        }
     }
     
     @objc
@@ -49,11 +52,6 @@ class GestureInterface {
         let x = Float(translation.x)
         let anglePan = abs(x) * (Float.pi / 180.0)
         
-        let object = HorizontalScrollIntentData(
-            rotationMatrix: SCNMatrix4MakeRotation(anglePan, 0, x, 0),
-            gestureStateEnded: gestureRecognizer.state == UIGestureRecognizerState.ended
-        )
-        
-        NotificationCenter.default.post(name: .horizontalScrollIntent, object: object)
+        self.sendHorizontalScrollIntent(HorizontalScrollIntentData(rotationMatrix: SCNMatrix4MakeRotation(anglePan, 0, x, 0), gestureStateEnded: gestureRecognizer.state == UIGestureRecognizerState.ended))
     }
 }

@@ -9,26 +9,31 @@
 import Foundation
 import SceneKit
 
-class Cube: SCNNode {
+class Cube: SCNNode, SelectIntentObserverProtocol, HorizontalScrollIntentObserverProtocol {
     
-    private var inputIntent: InputIntent?
-    private var sceneView: SCNView?
+    private(set) var id: Int
+    private(set) var sceneView: SCNView?
+    private(set) var inputIntent: InputIntent?
     
     required init?(coder aDecoder: NSCoder) {
         
-        fatalError("init(coder:) has not been implemented")
+        fatalError("Use Cube.init(SCNView)")
     }
     
-    init(sceneView _sceneView: SCNView?) {
+    init(sceneView _sceneView: SCNView?, inputIntent _inputIntent: InputIntent) {
+        
+        self.id = 1
         
         super.init()
         
-        self.name = "Cubo"
+        self.sceneView = _sceneView
+        self.inputIntent = _inputIntent
         
         let boxGeometry = SCNBox(width: 1, height: 1, length: 1, chamferRadius: 0)
         
         // Assign a colour material for each side of the box
-        let colors = [UIColor.green, // front
+        let colors = [
+            UIColor.green, // front
             UIColor.red, // right
             UIColor.blue, // back
             UIColor.yellow, // left
@@ -44,36 +49,27 @@ class Cube: SCNNode {
         
         boxGeometry.materials = sideMaterials
         
+        self.name = "Cubo"
+        
         self.geometry = boxGeometry
         
-        self.sceneView = _sceneView
-        
-        if let scnv = self.sceneView {
-            self.inputIntent = InputIntent(sceneView: scnv,
-                                           registerEvents: [.tap, .pan],
-                                           onSelectIntent: { (point, hits) in
-                                            
-                                                self.onTap(point, hits)
-                                            },
-                                           onHorizontalScrollIntent: { (horizontalScrollIntentData) in
-                
-                                                self.onPan(horizontalScrollIntentData)
-                                            })
-        }
+        self.registerSelectIntentObserver()
+        self.registerHorizontalScrollIntentObserver()
     }
     
-    private func onTap(_ point: CGPoint, _ hits: [SCNHitTestResult]) {
+    func onSelectIntent(selectIntentData: SelectIntentData) {
         
+        let hits = selectIntentData.hitTestResults
         if hits.count > 0 && hits[0].node == self {
             
             self.parent?.runAction(SCNAction.sequence([
                 SCNAction.move(by: SCNVector3(0, 1, 0), duration: 0.5),
                 SCNAction.move(by: SCNVector3(0, -1, 0), duration: 0.5)
-            ]))
+                ]))
         }
     }
     
-    private func onPan(_ horizontalScrollIntentData: HorizontalScrollIntentData) {
+    func onHorizontalScrollIntent(horizontalScrollIntentData: HorizontalScrollIntentData) {
         
         // Set the rotation transform to the new matrix
         self.transform = horizontalScrollIntentData.rotationMatrix
