@@ -40,7 +40,7 @@ class GestureInterface: SelectIntentSenderProtocol, HorizontalScrollIntentSender
         let point = gestureRecognizer.location(in: self.sceneView)
         if let hitTestResults = self.sceneView?.hitTest(point, options: [:]) {
         
-            self.sendSelectIntent(SelectIntentData(point: point, hitTestResults: hitTestResults))
+            self.sendSelectIntent(SelectIntentData(hitTestResults: hitTestResults))
         }
     }
     
@@ -49,9 +49,6 @@ class GestureInterface: SelectIntentSenderProtocol, HorizontalScrollIntentSender
         
         let translation = gestureRecognizer.translation(in: self.sceneView)
         
-        let x = Float(translation.x)
-        let anglePan = abs(x) * (Float.pi / 180.0)
-        
-        self.sendHorizontalScrollIntent(HorizontalScrollIntentData(rotationMatrix: SCNMatrix4MakeRotation(anglePan, 0, x, 0), gestureStateEnded: gestureRecognizer.state == UIGestureRecognizerState.ended))
+        self.sendHorizontalScrollIntent(HorizontalScrollIntentData(translation: Float(translation.x), gestureStateEnded: gestureRecognizer.state == UIGestureRecognizerState.ended))
     }
 }

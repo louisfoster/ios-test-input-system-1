@@ -29,12 +29,12 @@ class TextDisplay: SelectIntentObserverProtocol, HorizontalScrollIntentObserverP
     
     func onSelectIntent(selectIntentData: SelectIntentData) {
         
+        let hits = selectIntentData.hitTestResults
+        
         var text = """
         TAP!
-        Point: \(selectIntentData.point)\n
+        Hit Count: \(hits.count)\n
         """
-        
-        let hits = selectIntentData.hitTestResults
         
         if hits.count > 0, let name = hits[0].node.name {
             
@@ -48,7 +48,7 @@ class TextDisplay: SelectIntentObserverProtocol, HorizontalScrollIntentObserverP
         
         let text = """
         PAN!
-        Has translation: \(String(describing: horizontalScrollIntentData.rotationMatrix).prefix(10))
+        Has translation: \(horizontalScrollIntentData.translation)
         Has ended: \(horizontalScrollIntentData.gestureStateEnded)
         """
         

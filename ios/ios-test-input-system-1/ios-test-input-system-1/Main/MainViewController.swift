@@ -28,6 +28,12 @@ class MainViewController: UIViewController {
     @IBOutlet
     private var outputLabel: UILabel?
     
+    @IBOutlet
+    private var deactivateButton: UIButton?
+    
+    @IBOutlet
+    private var activateButton: UIButton?
+    
     private var scene: SCNScene?
     
     private var inputIntent: InputIntent?
@@ -36,6 +42,7 @@ class MainViewController: UIViewController {
     private var buttonInterface: ButtonInterface?
     private var gestureInterface: GestureInterface?
     private var textDisplay: TextDisplay?
+    private var cube: Cube?
     
     // MARK: Setup
     
@@ -93,7 +100,27 @@ class MainViewController: UIViewController {
         cubeHolder.position = SCNVector3(1, 0, -1)
         
         // Cube
-        let cube = Cube(sceneView: self.sceneView, inputIntent: i)
-        cubeHolder.addChildNode(cube)
+        let _cube = Cube(sceneView: self.sceneView, inputIntent: i)
+        cubeHolder.addChildNode(_cube)
+        self.cube = _cube
     }
+    
+    @IBAction
+    func deactivateButtonTouchUpInside(_ sender: Any) {
+        
+        if let _cube = self.cube {
+            
+            _cube.deregisterHorizontalScrollIntentObserver()
+        }
+    }
+    
+    @IBAction
+    func activateButtonTouchUpInside(_ sender: Any) {
+        
+        if let _cube = self.cube {
+            
+            _cube.registerHorizontalScrollIntentObserver()
+        }
+    }
+    
 }

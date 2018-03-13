@@ -13,13 +13,12 @@ import SceneKit
 
 struct SelectIntentData {
     
-    var point: CGPoint
     var hitTestResults: [SCNHitTestResult]
 }
 
 struct HorizontalScrollIntentData {
     
-    var rotationMatrix: SCNMatrix4
+    var translation: Float
     var gestureStateEnded: Bool
 }
 

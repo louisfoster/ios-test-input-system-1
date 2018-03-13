@@ -17,7 +17,7 @@ class Cube: SCNNode, SelectIntentObserverProtocol, HorizontalScrollIntentObserve
     
     required init?(coder aDecoder: NSCoder) {
         
-        fatalError("Use Cube.init(SCNView)")
+        fatalError("Use Cube.init(SCNView, InputIntent)")
     }
     
     init(sceneView _sceneView: SCNView?, inputIntent _inputIntent: InputIntent) {
@@ -72,7 +72,9 @@ class Cube: SCNNode, SelectIntentObserverProtocol, HorizontalScrollIntentObserve
     func onHorizontalScrollIntent(horizontalScrollIntentData: HorizontalScrollIntentData) {
         
         // Set the rotation transform to the new matrix
-        self.transform = horizontalScrollIntentData.rotationMatrix
+        let x = horizontalScrollIntentData.translation
+        let anglePan = abs(x) * (Float.pi / 180.0)
+        self.transform = SCNMatrix4MakeRotation(anglePan, 0, x, 0)
         
         // Preserve the pivot and transformation after pan has ended
         if horizontalScrollIntentData.gestureStateEnded {

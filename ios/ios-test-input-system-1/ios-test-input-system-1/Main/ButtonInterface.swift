@@ -43,13 +43,13 @@ class ButtonInterface: SelectIntentSenderProtocol, HorizontalScrollIntentSenderP
     @objc
     private func panLeftButtonTouchUpInside(_ sender: UIButton) {
         
-        self.sendHorizontalScrollIntent(HorizontalScrollIntentData(rotationMatrix: SCNMatrix4MakeRotation(0.5, 0, -50, 0), gestureStateEnded: true))
+        self.sendHorizontalScrollIntent(HorizontalScrollIntentData(translation: -50, gestureStateEnded: true))
     }
     
     @objc
     private func panRightButtonTouchUpInside(_ sender: UIButton) {
         
-        self.sendHorizontalScrollIntent(HorizontalScrollIntentData(rotationMatrix: SCNMatrix4MakeRotation(0.5, 0, 50, 0), gestureStateEnded: true))
+        self.sendHorizontalScrollIntent(HorizontalScrollIntentData(translation: 50, gestureStateEnded: true))
     }
     
     @objc
@@ -58,7 +58,7 @@ class ButtonInterface: SelectIntentSenderProtocol, HorizontalScrollIntentSenderP
         let point = CGPoint(x: 260.0, y: 270.0)
         if let hitTestResults = self.sceneView?.hitTest(point, options: [:]) {
             
-            self.sendSelectIntent(SelectIntentData(point: point, hitTestResults: hitTestResults))
+            self.sendSelectIntent(SelectIntentData(hitTestResults: hitTestResults))
         }
     }
 }
