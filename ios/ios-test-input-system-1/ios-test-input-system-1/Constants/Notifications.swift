@@ -13,6 +13,6 @@ extension Notification.Name {
     // MARK: Input Intent Events
     
     static let selectIntent = Notification.Name("selectIntent")
-    
     static let horizontalScrollIntent = Notification.Name("horizontalScrollIntent")
+    static let rotateIntent = Notification.Name("rotateIntent")
 }

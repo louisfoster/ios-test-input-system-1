@@ -9,101 +9,25 @@
 import UIKit
 import SceneKit
 
-// MARK: Intent Data Structures
-
-struct SelectIntentData {
-    
-    var hitTestResults: [SCNHitTestResult]
-}
-
-struct HorizontalScrollIntentData {
-    
-    var translation: Float
-    var gestureStateEnded: Bool
-}
-
-// MARK: Intent Sender Protocols
-
-protocol SelectIntentSenderProtocol {
-    
-    var sceneView: SCNView? { get }
-}
-
-extension SelectIntentSenderProtocol {
-    
-    func sendSelectIntent(_ selectIntentData: SelectIntentData) {
-        
-        NotificationCenter.default.post(name: .selectIntent, object: selectIntentData)
-    }
-}
-
-protocol HorizontalScrollIntentSenderProtocol {}
-
-extension HorizontalScrollIntentSenderProtocol {
-    
-    func sendHorizontalScrollIntent(_ horizontalScrollIntentData: HorizontalScrollIntentData) {
-        
-        NotificationCenter.default.post(name: .horizontalScrollIntent, object: horizontalScrollIntentData)
-    }
-}
-
-// MARK: Intent Observer Protocols
-
-protocol SelectIntentObserverProtocol {
-    
-    var id: Int { get }
-    var inputIntent: InputIntent? { get }
-    func onSelectIntent(selectIntentData: SelectIntentData)
-}
-
-extension SelectIntentObserverProtocol {
-    
-    func registerSelectIntentObserver() {
-        
-        self.inputIntent?.addSelectIntentObserver(id: self.id, onSelectIntent: self.onSelectIntent)
-    }
-    
-    func deregisterSelectIntentObserver() {
-        
-        self.inputIntent?.removeSelectIntentObserver(id: self.id)
-    }
-}
-
-protocol HorizontalScrollIntentObserverProtocol {
-    
-    var id: Int { get }
-    var inputIntent: InputIntent? { get }
-    func onHorizontalScrollIntent(horizontalScrollIntentData: HorizontalScrollIntentData)
-}
-
-extension HorizontalScrollIntentObserverProtocol {
-    
-    func registerHorizontalScrollIntentObserver() {
-        
-        self.inputIntent?.addHorizontalScrollIntentObserver(id: self.id, onHorizontalScrollIntent: self.onHorizontalScrollIntent)
-    }
-    
-    func deregisterHorizontalScrollIntentObserver() {
-        
-        self.inputIntent?.removeHorizontalScrollIntentObserver(id: self.id)
-    }
-}
-
 // MARK: Input Intent
 
 protocol InputIntentProtocol {
     
     var selectIntentObservers: Dictionary<Int, OnSelectIntentClosure> { get }
     var horizontalScrollIntentObservers: Dictionary<Int, OnHorizontalScrollIntentClosure> { get }
+    var rotateIntentObservers: Dictionary<Int, OnRotateIntentClosure> { get }
     
     func selectIntentReceived(notification: Notification)
     func horizontalScrollIntentReceived(notification: Notification)
+    func rotateIntentReceived(notification: Notification)
     
     func addSelectIntentObserver(id: Int, onSelectIntent: @escaping OnSelectIntentClosure)
     func addHorizontalScrollIntentObserver(id: Int, onHorizontalScrollIntent: @escaping OnHorizontalScrollIntentClosure)
+    func addRotateIntentObserver(id: Int, onRotateIntent: @escaping OnRotateIntentClosure)
     
     func removeSelectIntentObserver(id: Int)
     func removeHorizontalScrollIntentObserver(id: Int)
+    func removeRotateIntentObserver(id: Int)
 }
 
 class InputIntent: InputIntentProtocol {
@@ -112,6 +36,7 @@ class InputIntent: InputIntentProtocol {
     
     private(set) var selectIntentObservers: Dictionary<Int, OnSelectIntentClosure>
     private(set) var horizontalScrollIntentObservers: Dictionary<Int, OnHorizontalScrollIntentClosure>
+    private(set) var rotateIntentObservers: Dictionary<Int, OnRotateIntentClosure>
 
     // MARK: Initializers
     
@@ -119,6 +44,7 @@ class InputIntent: InputIntentProtocol {
         
         self.selectIntentObservers = [:]
         self.horizontalScrollIntentObservers = [:]
+        self.rotateIntentObservers = [:]
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(InputIntent.selectIntentReceived(notification:)),
@@ -129,9 +55,14 @@ class InputIntent: InputIntentProtocol {
                                                selector: #selector(InputIntent.horizontalScrollIntentReceived(notification:)),
                                                name: .horizontalScrollIntent,
                                                object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(InputIntent.rotateIntentReceived(notification:)),
+                                               name: .rotateIntent,
+                                               object: nil)
     }
     
-    // MARK: Actions
+    // MARK: On Notification (Intent Received)
     
     @objc
     func selectIntentReceived(notification: Notification) {
@@ -157,6 +88,20 @@ class InputIntent: InputIntentProtocol {
         }
     }
     
+    @objc
+    func rotateIntentReceived(notification: Notification) {
+        
+        if let rotateIntentData = notification.object as? RotateIntentData {
+            
+            for (_, onRotateIntent) in self.rotateIntentObservers {
+                
+                onRotateIntent(rotateIntentData)
+            }
+        }
+    }
+    
+    // MARK: Add Intent Observer
+    
     func addSelectIntentObserver(id: Int, onSelectIntent: @escaping OnSelectIntentClosure) {
         
         self.selectIntentObservers[id] = onSelectIntent
@@ -167,6 +112,13 @@ class InputIntent: InputIntentProtocol {
         self.horizontalScrollIntentObservers[id] = onHorizontalScrollIntent
     }
     
+    func addRotateIntentObserver(id: Int, onRotateIntent: @escaping OnRotateIntentClosure) {
+    
+        self.rotateIntentObservers[id] = onRotateIntent
+    }
+    
+    // MARK: Remove Intent Observer
+    
     func removeSelectIntentObserver(id: Int) {
         
         self.selectIntentObservers[id] = nil
@@ -175,5 +127,10 @@ class InputIntent: InputIntentProtocol {
     func removeHorizontalScrollIntentObserver(id: Int) {
         
         self.horizontalScrollIntentObservers[id] = nil
+    }
+    
+    func removeRotateIntentObserver(id: Int) {
+        
+        self.rotateIntentObservers[id] = nil
     }
 }

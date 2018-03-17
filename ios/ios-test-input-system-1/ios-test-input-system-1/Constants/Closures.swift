@@ -13,3 +13,4 @@ import SceneKit
 
 typealias OnSelectIntentClosure = ((SelectIntentData) -> Void)
 typealias OnHorizontalScrollIntentClosure = ((HorizontalScrollIntentData) -> Void)
+typealias OnRotateIntentClosure = ((RotateIntentData) -> Void)

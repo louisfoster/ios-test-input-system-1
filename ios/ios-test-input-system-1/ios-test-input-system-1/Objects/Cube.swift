@@ -9,7 +9,7 @@
 import Foundation
 import SceneKit
 
-class Cube: SCNNode, SelectIntentObserverProtocol, HorizontalScrollIntentObserverProtocol {
+class Cube: SCNNode, SelectIntentObserverProtocol, HorizontalScrollIntentObserverProtocol, RotateIntentObserverProtocol {
     
     private(set) var id: Int
     private(set) var sceneView: SCNView?
@@ -55,6 +55,7 @@ class Cube: SCNNode, SelectIntentObserverProtocol, HorizontalScrollIntentObserve
         
         self.registerSelectIntentObserver()
         self.registerHorizontalScrollIntentObserver()
+        self.registerRotateIntentObserver()
     }
     
     func onSelectIntent(selectIntentData: SelectIntentData) {
@@ -79,6 +80,20 @@ class Cube: SCNNode, SelectIntentObserverProtocol, HorizontalScrollIntentObserve
         // Preserve the pivot and transformation after pan has ended
         if horizontalScrollIntentData.gestureStateEnded {
             
+            let currentPivot = self.pivot
+            let changePivot = SCNMatrix4Invert(self.transform)
+            self.pivot = SCNMatrix4Mult(changePivot, currentPivot)
+            self.transform = SCNMatrix4Identity
+        }
+    }
+    
+    func onRotateIntent(rotateIntentData: RotateIntentData) {
+        
+        let angleInRadians = rotateIntentData.angleInDegrees / 180.0 * Float.pi
+        
+        self.runAction(SCNAction.rotateBy(x: 0, y: CGFloat(angleInRadians), z: 0, duration: 0.3)) {
+            
+            // Necessary if we are combining the action with the scroll gesture
             let currentPivot = self.pivot
             let changePivot = SCNMatrix4Invert(self.transform)
             self.pivot = SCNMatrix4Mult(changePivot, currentPivot)

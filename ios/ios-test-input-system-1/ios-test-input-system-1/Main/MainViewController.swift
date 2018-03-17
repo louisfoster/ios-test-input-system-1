@@ -34,12 +34,16 @@ class MainViewController: UIViewController {
     @IBOutlet
     private var activateButton: UIButton?
     
+    @IBOutlet
+    private var rotateButton: UIButton?
+    
     private var scene: SCNScene?
     
     private var inputIntent: InputIntent?
     
     // These all need to be allocated to variables, otherwise they won't work
-    private var buttonInterface: ButtonInterface?
+    private var button0Interface: Button0Interface?
+    private var button1Interface: Button1Interface?
     private var gestureInterface: GestureInterface?
     private var textDisplay: TextDisplay?
     private var cube: Cube?
@@ -58,7 +62,7 @@ class MainViewController: UIViewController {
         
         self.addObjectsToScene()
         
-        self.sceneView?.showsStatistics = true
+//        self.sceneView?.showsStatistics = true
         self.sceneView?.backgroundColor = UIColor.black
         
         self.sceneView?.scene = self.scene
@@ -73,7 +77,12 @@ class MainViewController: UIViewController {
         
         if let dlb = self.dragLeftButton, let drb = self.dragRightButton, let tb = self.tapButton {
         
-            self.buttonInterface = ButtonInterface(sceneView: self.sceneView, panLeftButton: dlb, panRightButton: drb, tapButton: tb)
+            self.button0Interface = Button0Interface(sceneView: self.sceneView, panLeftButton: dlb, panRightButton: drb, tapButton: tb)
+        }
+        
+        if let rb = self.rotateButton {
+            
+            self.button1Interface = Button1Interface(sceneView: self.sceneView, rotateButton: rb)
         }
     }
     

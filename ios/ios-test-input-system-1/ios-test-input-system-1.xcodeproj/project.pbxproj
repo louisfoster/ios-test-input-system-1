@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		053233B299D701FFA9649B53 /* Pods_ios_test_input_system_1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4287D11DB35C16A29DDB256 /* Pods_ios_test_input_system_1.framework */; };
+		BF1558C7205CFAFE007036D8 /* InputIntentDataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1558C6205CFAFE007036D8 /* InputIntentDataStructures.swift */; };
+		BF1558CA205CFB5F007036D8 /* SelectIntentSenderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1558C9205CFB5F007036D8 /* SelectIntentSenderProtocol.swift */; };
+		BF1558CC205CFB85007036D8 /* HorizontalScrollIntentSenderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1558CB205CFB85007036D8 /* HorizontalScrollIntentSenderProtocol.swift */; };
+		BF1558CF205CFBBA007036D8 /* SelectIntentObserverProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1558CE205CFBBA007036D8 /* SelectIntentObserverProtocol.swift */; };
+		BF1558D1205CFBDB007036D8 /* HorizontalScrollIntentObserverProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1558D0205CFBDB007036D8 /* HorizontalScrollIntentObserverProtocol.swift */; };
+		BF1558D3205D00B7007036D8 /* RotateIntentSenderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1558D2205D00B7007036D8 /* RotateIntentSenderProtocol.swift */; };
+		BF1558D5205D015B007036D8 /* RotateIntentObserverProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1558D4205D015B007036D8 /* RotateIntentObserverProtocol.swift */; };
+		BF1558DA205D04E0007036D8 /* Button1Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1558D9205D04E0007036D8 /* Button1Interface.swift */; };
 		DE4577A320553C0D0075469A /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4577A220553C0D0075469A /* Cube.swift */; };
 		DE4577A520553FB90075469A /* Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4577A420553FB90075469A /* Closures.swift */; };
 		DEAC1FFD2054C52500EAD6F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAC1FFC2054C52500EAD6F0 /* AppDelegate.swift */; };
@@ -17,13 +25,21 @@
 		DEAC20142054C58900EAD6F0 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEAC20122054C58900EAD6F0 /* MainViewController.xib */; };
 		DEAC20172054D2CF00EAD6F0 /* InputIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAC20162054D2CF00EAD6F0 /* InputIntent.swift */; };
 		DEAC20192054D8A400EAD6F0 /* GestureInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAC20182054D8A400EAD6F0 /* GestureInterface.swift */; };
-		DEAC201B2054D8B300EAD6F0 /* ButtonInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAC201A2054D8B300EAD6F0 /* ButtonInterface.swift */; };
+		DEAC201B2054D8B300EAD6F0 /* Button0Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAC201A2054D8B300EAD6F0 /* Button0Interface.swift */; };
 		DEAC201D2054DFDD00EAD6F0 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAC201C2054DFDD00EAD6F0 /* Notifications.swift */; };
 		DEAC201F2054E52C00EAD6F0 /* TextDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEAC201E2054E52C00EAD6F0 /* TextDisplay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1D4EC7C8BD8C4C550BE4AAC2 /* Pods-ios-test-input-system-1.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-test-input-system-1.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios-test-input-system-1/Pods-ios-test-input-system-1.debug.xcconfig"; sourceTree = "<group>"; };
+		BF1558C6205CFAFE007036D8 /* InputIntentDataStructures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputIntentDataStructures.swift; sourceTree = "<group>"; };
+		BF1558C9205CFB5F007036D8 /* SelectIntentSenderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectIntentSenderProtocol.swift; sourceTree = "<group>"; };
+		BF1558CB205CFB85007036D8 /* HorizontalScrollIntentSenderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollIntentSenderProtocol.swift; sourceTree = "<group>"; };
+		BF1558CE205CFBBA007036D8 /* SelectIntentObserverProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectIntentObserverProtocol.swift; sourceTree = "<group>"; };
+		BF1558D0205CFBDB007036D8 /* HorizontalScrollIntentObserverProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScrollIntentObserverProtocol.swift; sourceTree = "<group>"; };
+		BF1558D2205D00B7007036D8 /* RotateIntentSenderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateIntentSenderProtocol.swift; sourceTree = "<group>"; };
+		BF1558D4205D015B007036D8 /* RotateIntentObserverProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateIntentObserverProtocol.swift; sourceTree = "<group>"; };
+		BF1558D9205D04E0007036D8 /* Button1Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button1Interface.swift; sourceTree = "<group>"; };
 		DE1229397960D1C230C9B93F /* Pods-ios-test-input-system-1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-test-input-system-1.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios-test-input-system-1/Pods-ios-test-input-system-1.release.xcconfig"; sourceTree = "<group>"; };
 		DE4577A220553C0D0075469A /* Cube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
 		DE4577A420553FB90075469A /* Closures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Closures.swift; sourceTree = "<group>"; };
@@ -36,7 +52,7 @@
 		DEAC20122054C58900EAD6F0 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		DEAC20162054D2CF00EAD6F0 /* InputIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputIntent.swift; sourceTree = "<group>"; };
 		DEAC20182054D8A400EAD6F0 /* GestureInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureInterface.swift; sourceTree = "<group>"; };
-		DEAC201A2054D8B300EAD6F0 /* ButtonInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonInterface.swift; sourceTree = "<group>"; };
+		DEAC201A2054D8B300EAD6F0 /* Button0Interface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button0Interface.swift; sourceTree = "<group>"; };
 		DEAC201C2054DFDD00EAD6F0 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		DEAC201E2054E52C00EAD6F0 /* TextDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDisplay.swift; sourceTree = "<group>"; };
 		F4287D11DB35C16A29DDB256 /* Pods_ios_test_input_system_1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_test_input_system_1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +87,65 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		BF1558C5205CFAD0007036D8 /* Input Intent */ = {
+			isa = PBXGroup;
+			children = (
+				BF1558CD205CFB9A007036D8 /* Observer Protocols */,
+				BF1558C8205CFB36007036D8 /* Sender Protocols */,
+				DEAC20162054D2CF00EAD6F0 /* InputIntent.swift */,
+				BF1558C6205CFAFE007036D8 /* InputIntentDataStructures.swift */,
+			);
+			path = "Input Intent";
+			sourceTree = "<group>";
+		};
+		BF1558C8205CFB36007036D8 /* Sender Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				BF1558C9205CFB5F007036D8 /* SelectIntentSenderProtocol.swift */,
+				BF1558CB205CFB85007036D8 /* HorizontalScrollIntentSenderProtocol.swift */,
+				BF1558D2205D00B7007036D8 /* RotateIntentSenderProtocol.swift */,
+			);
+			path = "Sender Protocols";
+			sourceTree = "<group>";
+		};
+		BF1558CD205CFB9A007036D8 /* Observer Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				BF1558CE205CFBBA007036D8 /* SelectIntentObserverProtocol.swift */,
+				BF1558D0205CFBDB007036D8 /* HorizontalScrollIntentObserverProtocol.swift */,
+				BF1558D4205D015B007036D8 /* RotateIntentObserverProtocol.swift */,
+			);
+			path = "Observer Protocols";
+			sourceTree = "<group>";
+		};
+		BF1558D6205D043E007036D8 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				DEAC20182054D8A400EAD6F0 /* GestureInterface.swift */,
+				DEAC201A2054D8B300EAD6F0 /* Button0Interface.swift */,
+				BF1558D9205D04E0007036D8 /* Button1Interface.swift */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		BF1558D7205D0452007036D8 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				DEAC201C2054DFDD00EAD6F0 /* Notifications.swift */,
+				DE4577A420553FB90075469A /* Closures.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		BF1558D8205D0471007036D8 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				DEAC201E2054E52C00EAD6F0 /* TextDisplay.swift */,
+				DE4577A220553C0D0075469A /* Cube.swift */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
 		DEAC1FF02054C52500EAD6F0 = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +167,10 @@
 		DEAC1FFB2054C52500EAD6F0 /* ios-test-input-system-1 */ = {
 			isa = PBXGroup;
 			children = (
+				BF1558D7205D0452007036D8 /* Constants */,
+				BF1558C5205CFAD0007036D8 /* Input Intent */,
+				BF1558D6205D043E007036D8 /* Interfaces */,
+				BF1558D8205D0471007036D8 /* Objects */,
 				DEAC20102054C57500EAD6F0 /* Main */,
 				DEAC1FFC2054C52500EAD6F0 /* AppDelegate.swift */,
 				DEAC20032054C52500EAD6F0 /* Assets.xcassets */,
@@ -106,13 +185,6 @@
 			children = (
 				DEAC20112054C58900EAD6F0 /* MainViewController.swift */,
 				DEAC20122054C58900EAD6F0 /* MainViewController.xib */,
-				DEAC20162054D2CF00EAD6F0 /* InputIntent.swift */,
-				DEAC20182054D8A400EAD6F0 /* GestureInterface.swift */,
-				DEAC201A2054D8B300EAD6F0 /* ButtonInterface.swift */,
-				DEAC201C2054DFDD00EAD6F0 /* Notifications.swift */,
-				DEAC201E2054E52C00EAD6F0 /* TextDisplay.swift */,
-				DE4577A220553C0D0075469A /* Cube.swift */,
-				DE4577A420553FB90075469A /* Closures.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -258,15 +330,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF1558C7205CFAFE007036D8 /* InputIntentDataStructures.swift in Sources */,
 				DEAC201D2054DFDD00EAD6F0 /* Notifications.swift in Sources */,
+				BF1558D1205CFBDB007036D8 /* HorizontalScrollIntentObserverProtocol.swift in Sources */,
+				BF1558D3205D00B7007036D8 /* RotateIntentSenderProtocol.swift in Sources */,
+				BF1558CF205CFBBA007036D8 /* SelectIntentObserverProtocol.swift in Sources */,
 				DEAC201F2054E52C00EAD6F0 /* TextDisplay.swift in Sources */,
 				DE4577A520553FB90075469A /* Closures.swift in Sources */,
 				DEAC20172054D2CF00EAD6F0 /* InputIntent.swift in Sources */,
+				BF1558D5205D015B007036D8 /* RotateIntentObserverProtocol.swift in Sources */,
+				BF1558CA205CFB5F007036D8 /* SelectIntentSenderProtocol.swift in Sources */,
 				DEAC20192054D8A400EAD6F0 /* GestureInterface.swift in Sources */,
+				BF1558DA205D04E0007036D8 /* Button1Interface.swift in Sources */,
 				DE4577A320553C0D0075469A /* Cube.swift in Sources */,
 				DEAC1FFD2054C52500EAD6F0 /* AppDelegate.swift in Sources */,
 				DEAC20132054C58900EAD6F0 /* MainViewController.swift in Sources */,
-				DEAC201B2054D8B300EAD6F0 /* ButtonInterface.swift in Sources */,
+				DEAC201B2054D8B300EAD6F0 /* Button0Interface.swift in Sources */,
+				BF1558CC205CFB85007036D8 /* HorizontalScrollIntentSenderProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

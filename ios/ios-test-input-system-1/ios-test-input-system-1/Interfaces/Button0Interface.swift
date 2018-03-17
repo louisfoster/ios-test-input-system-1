@@ -1,5 +1,5 @@
 //
-//  ButtonInterface.swift
+//  Button0Interface.swift
 //  ios-test-input-system-1
 //
 //  Created by Louie on 11/3/18.
@@ -9,7 +9,7 @@
 import UIKit
 import SceneKit
 
-class ButtonInterface: SelectIntentSenderProtocol, HorizontalScrollIntentSenderProtocol {
+class Button0Interface: SelectIntentSenderProtocol, HorizontalScrollIntentSenderProtocol {
     
     // MARK: Properties
     
@@ -31,11 +31,11 @@ class ButtonInterface: SelectIntentSenderProtocol, HorizontalScrollIntentSenderP
         self.panRightButton = _panRightButton
         self.tapButton = _tapButton
         
-        self.panLeftButton.addTarget(self, action: #selector(ButtonInterface.panLeftButtonTouchUpInside(_:)), for: .touchUpInside)
+        self.panLeftButton.addTarget(self, action: #selector(Button0Interface.panLeftButtonTouchUpInside(_:)), for: .touchUpInside)
         
-        self.panRightButton.addTarget(self, action: #selector(ButtonInterface.panRightButtonTouchUpInside(_:)), for: .touchUpInside)
+        self.panRightButton.addTarget(self, action: #selector(Button0Interface.panRightButtonTouchUpInside(_:)), for: .touchUpInside)
         
-        self.tapButton.addTarget(self, action: #selector(ButtonInterface.tapButtonTouchUpInside(_:)), for: .touchUpInside)
+        self.tapButton.addTarget(self, action: #selector(Button0Interface.tapButtonTouchUpInside(_:)), for: .touchUpInside)
     }
     
     // MARK: Actions
@@ -43,13 +43,13 @@ class ButtonInterface: SelectIntentSenderProtocol, HorizontalScrollIntentSenderP
     @objc
     private func panLeftButtonTouchUpInside(_ sender: UIButton) {
         
-        self.sendHorizontalScrollIntent(HorizontalScrollIntentData(translation: -50, gestureStateEnded: true))
+        self.sendHorizontalScrollIntent(HorizontalScrollIntentData(translation: -50, gestureStateEnded: true, inputType: .button0))
     }
     
     @objc
     private func panRightButtonTouchUpInside(_ sender: UIButton) {
         
-        self.sendHorizontalScrollIntent(HorizontalScrollIntentData(translation: 50, gestureStateEnded: true))
+        self.sendHorizontalScrollIntent(HorizontalScrollIntentData(translation: 50, gestureStateEnded: true, inputType: .button0))
     }
     
     @objc
@@ -58,7 +58,7 @@ class ButtonInterface: SelectIntentSenderProtocol, HorizontalScrollIntentSenderP
         let point = CGPoint(x: 260.0, y: 270.0)
         if let hitTestResults = self.sceneView?.hitTest(point, options: [:]) {
             
-            self.sendSelectIntent(SelectIntentData(hitTestResults: hitTestResults))
+            self.sendSelectIntent(SelectIntentData(hitTestResults: hitTestResults, inputType: .button0))
         }
     }
 }

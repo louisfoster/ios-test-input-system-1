@@ -17,6 +17,7 @@
                 <outlet property="dragLeftButton" destination="4u3-6o-dia" id="Oh5-f6-5IQ"/>
                 <outlet property="dragRightButton" destination="nTD-G7-Lmc" id="YnR-SI-aza"/>
                 <outlet property="outputLabel" destination="eSY-Ns-JLf" id="YQ9-qr-R0J"/>
+                <outlet property="rotateButton" destination="e8X-gz-V8C" id="00e-3E-m5Z"/>
                 <outlet property="sceneView" destination="cur-8g-rzK" id="hnF-fy-vMU"/>
                 <outlet property="tapButton" destination="pEs-TE-sIl" id="1Fh-rY-EBe"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -81,10 +82,23 @@
                         <constraint firstAttribute="height" constant="44" id="L1m-rO-fmv"/>
                     </constraints>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e8X-gz-V8C">
+                    <rect key="frame" x="327" y="531" width="32" height="32"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="gbs-8P-1fd"/>
+                        <constraint firstAttribute="width" constant="32" id="hh5-kS-Y2b"/>
+                    </constraints>
+                    <state key="normal" title="↻">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="cur-8g-rzK" secondAttribute="trailing" id="3FG-xH-IEm"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="e8X-gz-V8C" secondAttribute="trailing" constant="16" id="6Xs-oL-pnv"/>
+                <constraint firstItem="TVc-0J-HL8" firstAttribute="top" secondItem="e8X-gz-V8C" secondAttribute="bottom" constant="16" id="Ds7-Wy-C05"/>
                 <constraint firstItem="cur-8g-rzK" firstAttribute="top" secondItem="eSY-Ns-JLf" secondAttribute="bottom" id="GcJ-ZS-vfu"/>
                 <constraint firstItem="eSY-Ns-JLf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Hy3-wN-hnf"/>
                 <constraint firstItem="TVc-0J-HL8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NiU-hF-t5v"/>
